@@ -59,3 +59,4 @@ class TrysqlPage(BasePage):
             return col_list
         except (IndexError, AttributeError):
             raise Exception(f"Expected some data. But no result in table '{self.RESULT_SQL_TABLE[1]}'")
+
