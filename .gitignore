@@ -2,4 +2,3 @@
 .pytest_cache
 __pycache__/
 test_results/*
-chromedriver-win64
