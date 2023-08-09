@@ -40,3 +40,7 @@
 ```
 #> allure serve test_results/
 ```
+
+ ### 4. Запуск полностью в docker-контейнере (TODO)
+4.1. файл draft_Dockerfile
+4.2. исправить webdriver.Remote на webdriver.Chrome
