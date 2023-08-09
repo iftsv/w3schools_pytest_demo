@@ -43,4 +43,10 @@
 
  ### 4. Запуск полностью в docker-контейнере (TODO)
 4.1. файл draft_Dockerfile
+
 4.2. исправить webdriver.Remote на webdriver.Chrome
+
+4.3. Получение/Сборка
+```
+docker pull selenium/standalone-chrome && docker buildx b w3schools_pytest_runner .
+```
