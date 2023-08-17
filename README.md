@@ -21,32 +21,14 @@
 2.3. В случае добавления тестов для браузера Firefox, необходимо использовать другие селекторы, т.к. данные в таблице вставляются в iframe для Firefox. Так же в браузере Firefox не работают INSERT запросы
 
 ### 3. Запуск тестов
-3.1. На машину необходимо установить docker и контейнер с Chrome 
+3.1. На машину необходимо установить docker
+
+3.2. Собрать образ из Dockerfile
 ```
-#> docker pull selenium/standalone-chrome
+#> docker build . -t w3schools_pytest_demo_runner
 ```
 
-3.2. Запуск контейнера 
+3.3. Запустить контейнер
 ```
-#> docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-chrome:latest
-```
-
-3.3. Запуск тестов из каталога репозитория
-```
-#> python -m pytest --alluredir=test_results/  .\tests\
-```
-
-3.4. Для просмотра отчетов 
-```
-#> allure serve test_results/
-```
-
- ### 4. Запуск полностью в docker-контейнере (TODO)
-4.1. файл draft_Dockerfile
-
-4.2. исправить webdriver.Remote на webdriver.Chrome
-
-4.3. Получение/Сборка
-```
-docker pull selenium/standalone-chrome && docker buildx b w3schools_pytest_runner .
+#> docker run --rm w3schools_pytest_demo_runner 
 ```
