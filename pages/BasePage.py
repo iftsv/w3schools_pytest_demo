@@ -21,6 +21,7 @@ class BasePage:
 
     def get_sql_result_table(self, by_table_locator):
         try:
+            # print(request.param)
             return WebDriverWait(self.driver, 15).until(ec.visibility_of_element_located(by_table_locator))
         except TimeoutException as ex:
             print("Exception has been thrown. " + str(ex))

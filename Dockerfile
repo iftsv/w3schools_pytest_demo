@@ -6,4 +6,4 @@ RUN sudo apt update && sudo apt install -y git && \
     pip install -r requirements.txt
 CMD rm -r * && \
     git clone --depth 1 https://github.com/iftsv/w3schools_pytest_demo.git . && \
-    python3 -m pytest -s --alluredir=test_results/ /tests_project/tests/
+    python3 -m pytest -s --alluredir=test_results/ ./tests/

@@ -66,7 +66,7 @@ class TestTrysql(BaseTest):
         )
 
         actual_row = self.trysqlPage.get_row_from_result_table_as_list()
-        # Compare two lists using loop
+        # Compare two lists
         assert actual_row == self.expected_row_result_table, f"Inserted data should be equal to expected data"
 
     @allure.description("TASK 4. Update all fields (except CustomerID) in any record of the Customers table "
@@ -108,7 +108,7 @@ class TestTrysql(BaseTest):
                         self.test_sql_PostalCode + "13",
                         self.test_sql_Country + "13"]
 
-        # Compare two lists using loop
+        # Compare two lists
         assert actual_row == expected_row, f"Updated data should be equal to expected data"
 
     @allure.description("TASK 5. Check that 'Get your own SQL server' button is visible on the TrySQL Page")
