@@ -17,11 +17,11 @@ class BaseTest:
             chrome_options.add_argument("--headless")
             chrome_options.add_argument("--disable-dev-shm-usage")
             chrome_options.add_argument("--log-level=3")
-            # self.web_driver = webdriver.Chrome(options=chrome_options)
-            self.web_driver = webdriver.Remote(
-                command_executor='http://localhost:4444/wd/hub',
-                options=chrome_options
-            )
+            self.web_driver = webdriver.Chrome(options=chrome_options)
+            # self.web_driver = webdriver.Remote(
+            #     command_executor='http://localhost:4444/wd/hub',
+            #     options=chrome_options
+            # )
 
         # if request.param == "firefox":
         #     firefox_options = FirefoxOptions()
