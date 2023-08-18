@@ -12,7 +12,7 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
-    def do_click(self, by_locator: object) -> object:
+    def do_click(self, by_locator):
         WebDriverWait(self.driver, 30).until(ec.visibility_of_element_located(by_locator)).click()
 
     def get_element_text(self, by_locator):

@@ -1,4 +1,3 @@
-import time
 import re
 import uuid
 import allure
