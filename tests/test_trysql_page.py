@@ -23,9 +23,7 @@ class TestTrysql(BaseTest):
     @allure.description("TASK 1. Retrieve all rows from the Customers table and make sure that the record "
                         "with ContactName equal to 'Giovanni Rovelli' has Address = 'Via Ludovico il Moro 22'")
     def test_customers_contactname_address(self):
-        self.trysqlPage.run_sql_query("SELECT * FROM Customers;")
-        time.sleep(3)
-        actual_address = self.trysqlPage.get_address_by_contactname_from_result_table()
+        actual_address = self.trysqlPage.get_address_by_contactname_from_table("SELECT * FROM Customers;")
 
         assert actual_address == self.trysqlPage.EXPECTED_ADDRESS, \
             f"ContactName = {self.trysqlPage.CONTACT_NAME} should have address {self.trysqlPage.EXPECTED_ADDRESS} " \
@@ -34,10 +32,9 @@ class TestTrysql(BaseTest):
     @allure.description("TASK 2. Retrieve only those rows from the Customers table where city='London'. "
                         "Verify that there are exactly 6 records in the table")
     def test_customers_filter_by_city(self):
-        self.trysqlPage.run_sql_query("SELECT * FROM Customers WHERE city='London';")
-        time.sleep(3)
+        actual_num_rows = int(self.trysqlPage.get_number_of_rows_from_table("SELECT * FROM Customers WHERE "
+                                                                            "city='London';"))
         actual_num_rows_from_div = int(re.findall("[0-9]+", self.trysqlPage.get_number_of_rows_from_div_element())[0])
-        actual_num_rows = int(self.trysqlPage.get_number_of_rows_from_result_table())
 
         assert actual_num_rows_from_div == self.trysqlPage.EXPECTED_CITY_NUM_RECORDS, \
             f"Number of rows in div element {self.trysqlPage.RESULT_NUM_RECORDS_DIV} " \
@@ -55,17 +52,15 @@ class TestTrysql(BaseTest):
             f"VALUES ('{self.test_sql_CustomerName}', '{self.test_sql_ContactName}', '{self.test_sql_Address}', "
             f"'{self.test_sql_City}', '{self.test_sql_PostalCode}', '{self.test_sql_Country}');"
         )
-        time.sleep(3)
 
         # Get inserted test data from table
-        self.trysqlPage.run_sql_query(
+        actual_row = self.trysqlPage.get_row_from_result_table_as_list(
             f"SELECT CustomerName, ContactName, Address, City, PostalCode, Country FROM Customers "
             f"WHERE CustomerName='{self.test_sql_CustomerName}' AND ContactName='{self.test_sql_ContactName}' AND "
             f"Address='{self.test_sql_Address}' AND City='{self.test_sql_City}' AND "
             f"PostalCode='{self.test_sql_PostalCode}' AND Country='{self.test_sql_Country}';"
         )
 
-        actual_row = self.trysqlPage.get_row_from_result_table_as_list()
         # Compare two lists
         assert actual_row == self.expected_row_result_table, f"Inserted data should be equal to expected data"
 
@@ -78,7 +73,6 @@ class TestTrysql(BaseTest):
             f"VALUES ('{self.test_sql_CustomerName}', '{self.test_sql_ContactName}', '{self.test_sql_Address}', "
             f"'{self.test_sql_City}', '{self.test_sql_PostalCode}', '{self.test_sql_Country}');"
         )
-        time.sleep(3)
 
         # UPDATE test data to table
         self.trysqlPage.run_sql_query(
@@ -93,14 +87,13 @@ class TestTrysql(BaseTest):
         )
 
         # Get updated test data from table
-        self.trysqlPage.run_sql_query(
+        actual_row = self.trysqlPage.get_row_from_result_table_as_list(
             f"SELECT CustomerName, ContactName, Address, City, PostalCode, Country FROM Customers "
             f"WHERE CustomerName='{self.test_sql_CustomerName}13' AND ContactName='{self.test_sql_ContactName}13' AND "
             f"Address='{self.test_sql_Address}13' AND City='{self.test_sql_City}13' AND "
             f"PostalCode='{self.test_sql_PostalCode}13' AND Country='{self.test_sql_Country}13';"
         )
 
-        actual_row = self.trysqlPage.get_row_from_result_table_as_list()
         expected_row = [self.test_sql_CustomerName + "13",
                         self.test_sql_ContactName + "13",
                         self.test_sql_Address + "13",

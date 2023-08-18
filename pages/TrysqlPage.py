@@ -27,7 +27,8 @@ class TrysqlPage(BasePage):
         self.driver.execute_script(f"window.editor.setValue(\"{sql_query}\");")
         self.do_click(self.RUN_SQL_BUTTON)
 
-    def get_address_by_contactname_from_result_table(self):
+    def get_address_by_contactname_from_table(self, sql_query):
+        self.run_sql_query(sql_query)
         table = self.get_sql_result_table(self.RESULT_SQL_TABLE)
         rows = table.find_elements(By.TAG_NAME, "tr")
         address = ""
@@ -43,13 +44,15 @@ class TrysqlPage(BasePage):
         div_text = self.get_element_text(self.RESULT_NUM_RECORDS_DIV)
         return div_text
 
-    def get_number_of_rows_from_result_table(self):
+    def get_number_of_rows_from_table(self, sql_query):
+        self.run_sql_query(sql_query)
         table = self.get_sql_result_table(self.RESULT_SQL_TABLE)
         rows = table.find_elements(By.TAG_NAME, "tr")
         # ignore header of table
         return len(rows) - 1
 
-    def get_row_from_result_table_as_list(self):
+    def get_row_from_result_table_as_list(self, sql_query):
+        self.run_sql_query(sql_query)
         table = self.get_sql_result_table(self.RESULT_SQL_TABLE)
         try:
             col_list = []
