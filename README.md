@@ -25,10 +25,10 @@
 
 3.2. Собрать образ из Dockerfile
 ```
-#> docker build . --no-cache -t w3schools_pytest_demo_runner
+$ docker build . --no-cache -t w3schools_pytest_demo_runner
 ```
 
 3.3. Запустить контейнер
 ```
-#> docker run --rm w3schools_pytest_demo_runner 
+$ docker run --rm w3schools_pytest_demo_runner 
 ```
