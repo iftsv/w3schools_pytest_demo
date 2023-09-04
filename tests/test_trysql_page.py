@@ -103,7 +103,7 @@ class TestTrysql(BaseTest):
         # Compare two lists
         assert actual_row == expected_row, f"Updated data should be equal to expected data"
 
-    @allure.description("TASK 5. Check that 'Get your own SQL server' button is visible on the TrySQL Page")
+    @allure.description("TASK 5. Check that 'Get your own SQL server' button is visible on the TrySQL Page and has appropriate text")
     def test_get_your_own_server_button(self):
         text = self.trysqlPage.get_element_text(self.trysqlPage.GET_OWN_SERVER_BUTTON)
 
